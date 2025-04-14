@@ -19,20 +19,31 @@ namespace simple_messaging_system.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateMessage([FromBody] Message message)
+        public IActionResult CreateMessage([FromBody] MessageDto messageDto)
         {
             using (var uow = _dataStore.CreateUnitOfWork())
             {
                 var newMessage = new Message(uow)
                 {
-                    To = message.To,
-                    From = message.From,
-                    Subject = message.Subject,
-                    Body = message.Body,
+                    To = messageDto.To,
+                    From = messageDto.From,
+                    Subject = messageDto.Subject,
+                    Body = messageDto.Body,
                     IsRead = false
                 };
                 uow.CommitChanges();
-                return CreatedAtAction(nameof(GetMessage), new { id = newMessage.Oid }, newMessage);
+
+                var response = new MessageResponseDto
+                {
+                    Id = newMessage.Oid,
+                    To = newMessage.To,
+                    From = newMessage.From,
+                    Subject = newMessage.Subject,
+                    Body = newMessage.Body,
+                    IsRead = newMessage.IsRead
+                };
+
+                return CreatedAtAction(nameof(GetMessage), new { id = response.Id }, response);
             }
         }
 
@@ -62,7 +73,18 @@ namespace simple_messaging_system.Controllers
 
                 message.IsRead = true;
                 uow.CommitChanges();
-                return Ok(message);
+
+                var response = new MessageResponseDto
+                {
+                    Id = message.Oid,
+                    To = message.To,
+                    From = message.From,
+                    Subject = message.Subject,
+                    Body = message.Body,
+                    IsRead = message.IsRead
+                };
+
+                return Ok(response);
             }
         }
 
@@ -75,7 +97,17 @@ namespace simple_messaging_system.Controllers
                 if (message == null)
                     return NotFound();
 
-                return Ok(message);
+                var response = new MessageResponseDto
+                {
+                    Id = message.Oid,
+                    To = message.To,
+                    From = message.From,
+                    Subject = message.Subject,
+                    Body = message.Body,
+                    IsRead = message.IsRead
+                };
+
+                return Ok(response);
             }
         }
 
@@ -85,7 +117,17 @@ namespace simple_messaging_system.Controllers
             using (var uow = _dataStore.CreateUnitOfWork())
             {
                 var messages = uow.Query<Message>().ToList();
-                return Ok(messages);
+                var response = messages.Select(m => new MessageResponseDto
+                {
+                    Id = m.Oid,
+                    To = m.To,
+                    From = m.From,
+                    Subject = m.Subject,
+                    Body = m.Body,
+                    IsRead = m.IsRead
+                }).ToList();
+
+                return Ok(response);
             }
         }
 
@@ -97,7 +139,18 @@ namespace simple_messaging_system.Controllers
                 var messages = uow.Query<Message>()
                     .Where(m => m.To == userId || m.From == userId)
                     .ToList();
-                return Ok(messages);
+
+                var response = messages.Select(m => new MessageResponseDto
+                {
+                    Id = m.Oid,
+                    To = m.To,
+                    From = m.From,
+                    Subject = m.Subject,
+                    Body = m.Body,
+                    IsRead = m.IsRead
+                }).ToList();
+
+                return Ok(response);
             }
         }
     }
