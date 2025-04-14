@@ -22,7 +22,7 @@ A lightweight, RESTful messaging system built with .NET 8, featuring real-time m
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/simple-messaging-system.git
+   git clone https://github.com/obay/simple-messaging-system.git
    cd simple-messaging-system
    ```
 
