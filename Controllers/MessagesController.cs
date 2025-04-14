@@ -136,8 +136,10 @@ namespace simple_messaging_system.Controllers
         {
             using (var uow = _dataStore.CreateUnitOfWork())
             {
+                var escapedUserId = userId.Replace("@", "@@");
+                
                 var messages = uow.Query<Message>()
-                    .Where(m => m.To == userId || m.From == userId)
+                    .Where(m => m.To == escapedUserId)
                     .ToList();
 
                 var response = messages.Select(m => new MessageResponseDto
