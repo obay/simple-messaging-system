@@ -1,0 +1,6 @@
+@simple_messaging_system_HostAddress = http://localhost:5090
+
+GET {{simple_messaging_system_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
