@@ -1,16 +1,26 @@
 using DevExpress.Xpo;
+using System.Threading;
 
 namespace simple_messaging_system.Models
 {
     public class Message : XPObject
     {
-        public Message(Session session) : base(session) { }
+        public Message(Session session) : base(session) 
+        {
+            _to = string.Empty;
+            _from = string.Empty;
+            _subject = string.Empty;
+            _body = string.Empty;
+            _childMessages = new XPCollection<Message>(session);
+        }
 
         private string _to;
         private string _from;
         private string _subject;
         private string _body;
         private bool _isRead;
+        private Message? _parentMessage;
+        private XPCollection<Message> _childMessages;
 
         public string To
         {
@@ -41,5 +51,15 @@ namespace simple_messaging_system.Models
             get => _isRead;
             set => SetPropertyValue(nameof(IsRead), ref _isRead, value);
         }
+
+        [Association("Message-ChildMessages")]
+        public Message? ParentMessage
+        {
+            get => _parentMessage;
+            set => SetPropertyValue(nameof(ParentMessage), ref _parentMessage, value);
+        }
+
+        [Association("Message-ChildMessages")]
+        public XPCollection<Message> ChildMessages => GetCollection<Message>(nameof(ChildMessages));
     }
-} 
+}

@@ -7,6 +7,8 @@
     <RootNamespace>simple_messaging_system</RootNamespace>
     <UserSecretsId>b7c83ce7-9a5b-497e-9a17-5442b396ba53</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

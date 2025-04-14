@@ -3,6 +3,7 @@ using DevExpress.Xpo.DB;
 using simple_messaging_system.Data;
 using Serilog;
 using Serilog.Events;
+using System.Reflection;
 
 public class Program
 {
@@ -27,7 +28,12 @@ public class Program
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
 
             // Configure XPO
             XpoDataStore.Instance.GetDataLayer();

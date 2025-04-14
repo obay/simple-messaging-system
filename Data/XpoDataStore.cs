@@ -19,6 +19,7 @@ namespace simple_messaging_system.Data
             connectionString = "XpoProvider=SQLite;Data Source=Messages.db";
             dictionary = new ReflectionDictionary();
             dictionary.GetDataStoreSchema(typeof(Models.Message).Assembly);
+            dataLayer = new SimpleDataLayer(dictionary, XpoDefault.GetConnectionProvider(connectionString, AutoCreateOption.DatabaseAndSchema));
         }
 
         public IDataLayer GetDataLayer()
