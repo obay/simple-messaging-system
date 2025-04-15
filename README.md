@@ -59,8 +59,32 @@ A lightweight, RESTful messaging system built with .NET 8, featuring real-time m
 
 2. Run the container:
    ```bash
+   # Run with Swagger UI (default)
    docker run -p 8080:8080 simple-messaging-system
+
+   # Run without Swagger UI
+   docker run -p 8080:8080 -e DISABLE_SWAGGER=true simple-messaging-system
    ```
+
+### Using Docker Hub
+
+You can also run the application directly from Docker Hub without building the image locally:
+
+1. Pull the latest image from Docker Hub:
+   ```bash
+   docker pull xobay/simple-messaging-system:latest
+   ```
+
+2. Run the container:
+   ```bash
+   # Run with Swagger UI (default)
+   docker run -p 8080:8080 xobay/simple-messaging-system:latest
+
+   # Run without Swagger UI
+   docker run -p 8080:8080 -e DISABLE_SWAGGER=true xobay/simple-messaging-system:latest
+   ```
+
+The application will be available at `http://localhost:8080` with Swagger UI at `http://localhost:8080/swagger` (when enabled).
 
 ## Project Structure
 
@@ -78,9 +102,11 @@ simple-messaging-system/
 
 ## API Documentation
 
-The API documentation is available through Swagger UI when running the application. Access it at:
+The API documentation is available through Swagger UI when running the application. By default, Swagger UI is enabled in all environments. To disable it, set the `DISABLE_SWAGGER` environment variable to "true".
+
+Access Swagger UI at:
 - Development: `https://localhost:5001/swagger`
-- Production: Not available
+- Production: `http://localhost:8080/swagger` (when Swagger is not disabled)
 
 ## Logging
 
