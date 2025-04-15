@@ -77,8 +77,10 @@ public class Program
 
             // Configure the HTTP request pipeline.
             // Enable Swagger by default unless DISABLE_SWAGGER environment variable is set to "true"
-            bool disableSwagger = string.Equals(Environment.GetEnvironmentVariable("DISABLE_SWAGGER"), "true", StringComparison.OrdinalIgnoreCase);
-            if (!disableSwagger)
+            var disableSwagger = Environment.GetEnvironmentVariable("DISABLE_SWAGGER");
+            var shouldEnableSwagger = disableSwagger == null || !string.Equals(disableSwagger, "true", StringComparison.OrdinalIgnoreCase);
+            
+            if (shouldEnableSwagger)
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
