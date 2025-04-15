@@ -1,5 +1,10 @@
 # Simple Messaging System
 
+[![.NET](https://img.shields.io/badge/.NET-8.0-blue)](https://dotnet.microsoft.com/download/dotnet/8.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Docker](https://img.shields.io/badge/Docker-Supported-blue)](https://www.docker.com/)
+[![Swagger](https://img.shields.io/badge/Swagger-UI-green)](https://swagger.io/tools/swagger-ui/)
+
 A lightweight, RESTful messaging system built with .NET 8, featuring real-time message handling and persistent storage.
 
 ## Features
