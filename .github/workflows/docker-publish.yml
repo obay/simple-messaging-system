@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: obayx/simple-messaging-system
+  IMAGE_NAME: xobay/simple-messaging-system
 
 jobs:
   build-and-push:
