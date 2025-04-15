@@ -4,6 +4,8 @@ using simple_messaging_system.Data;
 using Serilog;
 using Serilog.Events;
 using System.Reflection;
+using Microsoft.AspNetCore.Http;
+using System.Diagnostics;
 
 public class Program
 {
@@ -42,6 +44,36 @@ public class Program
             builder.Host.UseSerilog();
 
             var app = builder.Build();
+
+            // Add request logging middleware
+            app.Use(async (context, next) =>
+            {
+                var startTime = Stopwatch.GetTimestamp();
+                var request = context.Request;
+                
+                // Log request details
+                Log.Information("HTTP {Method} {Path} started", request.Method, request.Path);
+
+                try
+                {
+                    await next();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "Unhandled exception occurred while processing {Method} {Path}", 
+                        request.Method, request.Path);
+                    throw;
+                }
+                finally
+                {
+                    var response = context.Response;
+                    var elapsedMs = Stopwatch.GetElapsedTime(startTime).TotalMilliseconds;
+                    
+                    // Log response details
+                    Log.Information("HTTP {Method} {Path} completed with {StatusCode} in {ElapsedMs}ms",
+                        request.Method, request.Path, response.StatusCode, elapsedMs);
+                }
+            });
 
             // Configure the HTTP request pipeline.
             // Enable Swagger by default unless DISABLE_SWAGGER environment variable is set to "true"
