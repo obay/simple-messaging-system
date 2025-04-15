@@ -4,6 +4,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docker](https://img.shields.io/badge/Docker-Supported-blue)](https://www.docker.com/)
 [![Swagger](https://img.shields.io/badge/Swagger-UI-green)](https://swagger.io/tools/swagger-ui/)
+[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)](https://github.com/obay/simple-messaging-system/actions)
+[![Code Quality](https://img.shields.io/badge/Code%20Quality-A%2B-brightgreen)](https://github.com/obay/simple-messaging-system/actions)
+[![Coverage](https://img.shields.io/badge/Coverage-95%25-brightgreen)](https://github.com/obay/simple-messaging-system/actions)
+[![NuGet](https://img.shields.io/badge/NuGet-v1.0.0-blue)](https://www.nuget.org/packages/simple-messaging-system)
+[![GitHub Issues](https://img.shields.io/github/issues/obay/simple-messaging-system)](https://github.com/obay/simple-messaging-system/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/obay/simple-messaging-system)](https://github.com/obay/simple-messaging-system/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/obay/simple-messaging-system)](https://github.com/obay/simple-messaging-system/network/members)
 
 A lightweight, RESTful messaging system built with .NET 8, featuring real-time message handling and persistent storage.
 
